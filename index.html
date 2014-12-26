@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>JUniversal</h1>
-        <h2>Create cross platform mobile apps--in Java</h2>
+        <h2>Cross platform, native mobile apps--in Java</h2>
         <a href="https://github.com/juniversal" class="button"><small>Follow me on</small> GitHub</a>
       </div>
     </header>
@@ -31,27 +31,38 @@
           <h3>
 <a id="a-new-approach-to-cross-platform-mobile" class="anchor" href="#a-new-approach-to-cross-platform-mobile" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new approach to cross platform mobile</h3>
 
-<p>Why write the same app from scratch for every mobile platform?
-Want a way to take the tools &amp; even codebase you use to develop for Java/Android today &amp; use that to build cross platform apps that run on Windows and iOS too?</p>
+<p>Why write the same app from scratch for every mobile platform?<br>
+Want a way to turn an Android Java codebase into a cross platform codebase, running on Windows and iOS too?</p>
 
-<p>JUniversal uses source code translation, translating Java to C# and (coming soon) C++/Objective C++.   Translated source is very user friendly, preserving comments and formatting.   </p>
+<p>JUniversal makes Java truly cross platform.  There are several technologies out there supporting cross platform mobile apps, each with their pros and cons.
+JUniversal is targetted to Java developers, like those already developing for Android in Java.
+It uses source code translation.  Among the cross platform technologies out there, JUniversal is arguably among the most native-like, as it produces (through
+translation) code in the native programming language, built/debugged/packaged with native tools.   In some ways it's like porting an Android Java app to other
+platforms but having a computer do the porting rather than a human being.
+</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>It's still got lots of rough edges, but the C# translation and JSimple library should work well enough to try out.   Check it out.   Share what you think.</p>
 
 <h3>
-<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Here's how it works</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>1.&nbsp; You pick the code that you want to share cross platform.  It can be a little bit of code (maybe some hairy algorithm) or a lot (everything in your app except the UI).   Develop that in Java, with your favorite Java IDE.  Ideally, create some JUnit tests for it too.   To keep things tidy, separate out shared code to separate modules/JARs.</p>
+
+<p>
+2.&nbsp;  At build time invoke JUniversal to do <i>source code translation</i>, converting <b>Java</b> to <b>C#</b> (for Windows/Windows Phone) or, coming soon, <b>C++/Objective C++</b> (for iOS or performance critical code on Android NDK/Windows).   JUniversal can also invoke Google's j2objc converter, to produce <b>Objective-C</b>.
+
+<p>Translated code is very human friendly, preserving comments and forwarding.   It's intended to look almost like a human being wrote in manually.   That's handy when debugging and has some other advantages.</p>
+
+<p>3.&nbsp;  For non-shared parts of your code, write those in the native platform language (C#, Objective-C, etc.).   JUniversal doesn't provide any support for UI today--the intention is that you write it natively.   That gives the best UX anyway.   Source translation makes it easy to mix and match translated code with hand written code and call one from the other--the 
+</p>
+
+</p>4.&nbsp;  Develop for each platform using native tools--XCode for iOS, Visual Studio for Windows, etc.   Build, debug, package, profile, and publish using native tools.
+Because soure is translated to the native programming language, it is essentially like a native app in pretty much every.</p>
+
+
+
+
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
