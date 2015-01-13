@@ -23,8 +23,9 @@ It's primarily targetted to sharing code across mobile apps, but the technology 
 2. In your build script invoke JUniversal to do <i>source code translation</i>, converting <b>Java</b> to <b>C#</b> (for Windows/Windows Phone) or, coming soon, <b>C++/Objective C++</b> (for iOS or performance critical code on Android NDK/Windows).   You can also use Google's j2objc converter, to produce <b>Objective-C</b>.<br>
 JUniversal translated source is very human friendly, preserving comments and forwarding.   It's intended to look almost like a human being wrote it manually.   That's handy when debugging and has other advantages.   Unit tests are translated as well.
 
-3. Source translation is half the technology here, handling the Java language proper.   The other half is the JSimple libraries, providing core functionality needed by most mobile apps (OAuth, JSON, network & file I/O, logging, unit testing, etc), in a way that's familiar to Java developers but also cross platform friendly.<br>
-For a typical mobile app, the intention is those libraries should provide enough support to share core app logic, server communication, and persistent client state cross platform, with just the UI native.
+3. Source translation is half the technology here, handling the Java language proper.   The other half is the [JSimple libraries](/jsimpledoc), providing core functionality needed by most mobile apps (OAuth, JSON, network & file I/O, logging, unit testing, etc), in a way that's familiar to Java developers but also cross platform friendly.<br>
+For a typical mobile app, the intention is those libraries should provide enough support to share core app logic, server communication, and persistent client state cross platform, with just the UI native.<br>
+Check out the [JSimple Javadoc](/jsimpledoc) for details.
 
 4. For non-shared parts of your code, write those in the native platform language (C#, Swift/Objective-C, etc.).   JUniversal doesn't provide any support for UI today&mdash;the intention is that you write it natively.   That gives the best UX anyway.
 
