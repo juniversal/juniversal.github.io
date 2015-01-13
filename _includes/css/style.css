@@ -14,6 +14,41 @@
 @import url("hoverex-all.css") screen;
 
 /*	################################################################
+	0. BAJ UPDATES
+################################################################# */
+
+hr.star-light,
+hr.star-primary {
+    margin: 60px auto 40px;
+    padding: 0;
+    max-width: 450px;
+    border: 0;
+    border-top: dotted 1px;
+    text-align: center;
+}
+
+/*
+hr.star-light:after,
+hr.star-primary:after {
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+*/
+
+hr.star-light {
+    border-color: #fff;
+}
+
+hr.star-light:after {
+    color: #fff;
+    background-color: #18bc9c;
+}
+
+/*################################################################
 	1. GENERAL STRUCTURES
 ################################################################# */
 	* { 
@@ -207,7 +242,7 @@ a:focus {
 
 #headerwrap {
 	background-color: {{ site.colors.primary }};
-	min-height: 550px;
+	min-height: 500px;
 	padding-top: 100px;
 	padding-bottom: 0px;
 	text-align: center;
@@ -220,7 +255,10 @@ a:focus {
 
 #headerwrap h1 {
 	color: white;
-	margin-bottom: 25px;
+	margin: 60px 0px;
+
+	font-size: 74px;
+	font-weight: 700;
 }
 
 #headerwrap .img-responsive {
@@ -388,6 +426,13 @@ a:focus {
 }
 
 .ctitle {
+	color: {{ site.colors.primary }};
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+/* Use h3 as general title style, not just for posts */
+h3 {
 	color: {{ site.colors.primary }};
 	font-weight: 700;
 	margin-bottom: 15px;
