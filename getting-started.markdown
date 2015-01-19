@@ -4,20 +4,53 @@ title: Getting Started
 permalink: /getting-started/
 ---
 
-### Example ###
+### Getting source and building ###
 
-As an example, say you're working on Acme's spiffy new mobile app.  You've an MVC design & figure the acme-model.jar model component (which may include persistent state, business logic, and client/server comms) is a good one to try make cross platform with JUniversal.
+Soon, you'll be able to grab builds from our CI server or Maven Central.
+But for now, it's best to build yourself (which is pretty easy).
+
+Get the source.
+
+    git clone https://github.com/juniversal/juniversal.git
+    git clone https://github.com/juniversal/jsimple.git
+
+Build the translator.   The Gradle wrapper downloads Gradle automatically---no need to install any tools.
+
+    cd juniversal
+    ./gradlew build install        [Linux/Mac/Cygwin]
+    gradlew build install          [Windows]
+
+`install` above means to copy the built stuff to your local Maven repository (`<home directory>/.m2` by default), where subsequent build steps will find it.
+
+Next build the Gradle plugins.
+
+    cd juniversal/build-tool-plugins/juniversal-gradle-plugins
+    ./gradlew build install        [Linux/Mac/Cygwin]
+    gradlew build install          [Windows]
+
+Build the JSimple Java libraries and translate them to C#.
+
+    cd jsimple
+    ./gradlew build build install javaToCSharp   [Linux/Mac/Cygwin]
+    gradlew build install javaToCSharp           [Windows]
+
+Optionally, you can build all the JSimple C# projects by opening `jsimple/c#/jsimple.sln` in Visual Studio.
+But you can also build them by just pointing directly, from your app's own Visual Studio file, to the JSimple modules you use.
+
+### Running the translator(s) the first time ###
+
+As an example, say you're working on Acme Corp's spiffy new mobile app.  You've got an MVC design & figure the acme-model.jar model component (which may include persistent state, business logic, and client/server comms) is a good one to try make cross platform with JUniversal.
 
 You probably start with a directory layout like:
 
     acme-model/src/main/java                   [Java source]
     acme-model/src/test/java                   [Java JUnit tests source]
 
-The easiest way to run the translator is with our Gradle plugins.   Add the following to your Gradle project to JUniversal-enable it:
+The easiest way to run the translator is with our Gradle plugins.   Add the following to your project's `build.gradle` file to JUniversal-enable it:
 
 	buildscript {
 	    repositories {
-	        mavenCentral()
+	        mavenLocal()
 	    }
 
 	    dependencies {
@@ -26,21 +59,39 @@ The easiest way to run the translator is with our Gradle plugins.   Add the foll
 	}
 
     apply plugin: 'javaToCSharp'
-    apply plugin: 'javaToObjectiveC'
-    apply plugin: 'javaToObjectiveC'
 
 	javaToCSharp {
 	}
 
-	javaToObjectiveC {
-	}
-
+`mavenLocal()` above means to look in the local Maven repository directory, which is where the JUniversal stuff was copied when built above.
 
 To invoke the translator then run:
 
     gradle javaToCSharp
 
- TODO: Add steps for running directly
+It will translate the main and (if present) test source.   JUnit tests are changed to NUnit in C# (see below).
+
+To also translate to Objective-C, include this in your `build.gradle` file:
+
+    apply plugin: 'javaToObjectiveC'
+
+    javaToObjectiveC {
+    }
+
+Download j2objc from http://github.com/google/j2objc/releases and set the `J2OBJC_HOME` environement variable to point to the j2objc distro, so our Gradle plugin can find it.   Then run `gradle javaToObjectiveC` to translate to objective C via `j2objc`.
+
+For fun, you can even translate to C++ if you want to see the current state of our work in progress C++ translator:
+
+    apply plugin: 'javaToCPlusPlus'
+
+    javaToCPlusPlus {
+    }
+
+Run `gradle javaToCPlusPlus` to do the translation.   You'll see a lot of C++ code get generated, but it's only partially baked, so don't expect it to work.
+
+We'll write up more later about using j2objc and JUniversal, but the rest of this doc will just cover C#.
+
+### Making your source translator friendly ###
 
 Now (after fixing up the Java for any translator reported issues) you'll have directory structure like:
 

@@ -4,10 +4,11 @@ exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'LICENSE']
 
 # Site settings
 title: JUniversal
-description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
+# Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+description: "Native,  cross platform,  mobile apps--in Java."
 analytics: #Google analytics code in the format XX-nnnnnnnn-n
 baseurl: "" #important: start with /
-url: "http://yourdomain.com"
+url: "http://juniversal.org"
 
 # Build settings
 markdown: kramdown
@@ -45,11 +46,11 @@ social:
 # Postal address (add as many lines as necessary). Shown in footer and on Contact page.
 address:
   - lines: 
-    - Some Ave, 987,
-    - 23890, New York,
-    - United States.
-email: hello@solidtheme.com
-tel: +34 8493-4893
+    - 1125 Sanctuary Parkway, Suite 300
+    - Alpharetta, GA 30022
+    - United States
+email: bret DOT johnson AT microsoft.com
+tel: +1 404 934 1946
 
 
 ### GENERAL DATA FOR VARIOUS LOCATIONS ###
@@ -57,7 +58,7 @@ tel: +34 8493-4893
 # Members information. Shown on About page.
 members:
   - name: Mark Webber
-    position: CEO
+    position: CEOf
     text: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     img: team01.jpg
     social:
@@ -105,7 +106,7 @@ clients:
     img: client04.png
     
 # Short text about your company. Shown in footer on every page and also separately on Home and Contact page.
-about: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+about: "JUniversal:  Native, cross platform, mobile apps in Java.  © 2015 Microsoft Mobile"
 
 # Testimonial content. Shown on Home and About page. 
 testimonial:
