@@ -6,29 +6,31 @@ permalink: /getting-started/
 
 ### Getting source and building ###
 
-Soon, you'll be able to grab builds from our CI server or Maven Central.
-But for now, it's best to build yourself (which is pretty easy).
+Soon you'll be able to grab builds from our CI server or Maven Central.
+But for now you'll want to build yourself (which is pretty easy).
 
-Get the source.
+Get the source, both for the JUniversal translator and JSimple libraries:
 
     git clone https://github.com/juniversal/juniversal.git
     git clone https://github.com/juniversal/jsimple.git
 
-Build the translator.   The Gradle wrapper downloads Gradle automatically---no need to install any tools.
+Build the translator.   The `gradlew` Gradle wrapper downloads Gradle automatically---no need to install any build tools.
+However, note that the translator uses Java 8.  So you'll have to install Java 8, if you don't already have it, and use for
+running Gradle everywhere below.
 
     cd juniversal
     ./gradlew build install        [Linux/Mac/Cygwin]
     gradlew build install          [Windows]
 
-`install` above means to copy the built stuff to your local Maven repository (`<home directory>/.m2` by default), where subsequent build steps will find it.
+`install` above means to copy the built stuff to your local Maven repository directory (`<home directory>/.m2` by default), where subsequent build steps will find it.
 
-Next build the Gradle plugins.
+Next build the Gradle plugins:
 
     cd juniversal/build-tool-plugins/juniversal-gradle-plugins
     ./gradlew build install        [Linux/Mac/Cygwin]
     gradlew build install          [Windows]
 
-Build the JSimple Java libraries and translate them to C#.
+Build the JSimple Java libraries and translate them to C#:
 
     cd jsimple
     ./gradlew build build install javaToCSharp   [Linux/Mac/Cygwin]
@@ -37,16 +39,20 @@ Build the JSimple Java libraries and translate them to C#.
 Optionally, you can build all the JSimple C# projects by opening `jsimple/c#/jsimple.sln` in Visual Studio.
 But you can also build them by just pointing directly, from your app's own Visual Studio file, to the JSimple modules you use.
 
-### Running the translator(s) the first time ###
+### Our running example  ###
 
-As an example, say you're working on Acme Corp's spiffy new mobile app.  You've got an MVC design & figure the acme-model.jar model component (which may include persistent state, business logic, and client/server comms) is a good one to try make cross platform with JUniversal.
+As a running example, say you're working on Acme Corp's spiffy new mobile app.  You've got an MVC design & figure the acme-model.jar model component (which may include persistent state, business logic, and client/server comms) is a good one to try make cross platform with JUniversal.
 
 You probably start with a directory layout like:
 
-    acme-model/src/main/java                   [Java source]
-    acme-model/src/test/java                   [Java JUnit tests source]
+    acme-app/acme-model/src/main/java                   [Java source]
+    acme-app/acme-model/src/test/java                   [Java JUnit tests source]
 
-The easiest way to run the translator is with our Gradle plugins.   Add the following to your project's `build.gradle` file to JUniversal-enable it:
+Maven directory conventions are used in this example, but that's not required or anything.
+
+### Running the translators on your code--Gradle plugins ###
+
+The easiest way to run the translators is with our Gradle plugins.   Add the following to `acme-model`'s `build.gradle` file to JUniversal-enable it:
 
 	buildscript {
 	    repositories {
@@ -87,11 +93,31 @@ For fun, you can even translate to C++ if you want to see the current state of o
     javaToCPlusPlus {
     }
 
-Run `gradle javaToCPlusPlus` to do the translation.   You'll see a lot of C++ code get generated, but it's only partially baked, so don't expect it to work.
+Run `gradle javaToCPlusPlus` to do the translation.   You'll see a lot of C++ code get generated, but it's only partially baked at this point, so don't expect it to work.
 
 We'll write up more later about using j2objc and JUniversal, but the rest of this doc will just cover C#.
 
-### Making your source translator friendly ###
+### Running the translators on your code--command line ###
+
+To run the translator directly, do 
+
+    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o <output-directory> -l <target-language> [-classpath <classpath>] [-sourcepath <sourcepath>] <java-project-directories-to-translate>...
+
+For example, to transate the main acme-model source:
+
+    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar acme-app/acme-model/src/main/java
+
+And the test source:
+
+    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar -sourcepath acme-app/acme-model/src/main/java  acme-app/acme-model/src/test/java
+
+### Fixing up your code to be translator friendly ###
+
+It's important to understand that the translator just handles the Java language proper along with a few core runtime primitives integrated with the language, like String and StringBuilder.
+
+For library calls, you'll want to switch them to JSimple libraries or potentially something else of your choosing.  So don't use java.util.HashMap; use jsimple.util.HashMap instead (which is pretty much the same, based on Apache Harmony, so normally an easy switch).   See the JSimple Javadoc for more info on what's all included.
+
+### More C# build setup ###
 
 Now (after fixing up the Java for any translator reported issues) you'll have directory structure like:
 
@@ -152,51 +178,15 @@ That is, the Java stuff is layed out in the normal way.   Maven directory conven
 
 The C# directory structure is also pretty conventional, for a C# project.
 
-
-
-
-
+### Unit tests ###
 
 As for the test code, JUnit tests are translated to NUnit tests in C#.   We're considering enhancing that to also
 support MSTest or XUnit, but current support is NUnit.  The idea is that you can use JUnit test runner, in your IDE or build
-scripts, to run your Java tests.   And, on the C# side, can use NUnit to run the C# unit tests,
-from Visual Studio (e.g. NUnit extension or Resharper) or outside. 
+scripts, to run your Java tests.   And, on the C# side, can use NUnit test runners to run the C# unit tests,
+from Visual Studio (e.g. via NUnit extension or Resharper) or outside. 
 
 To tweak your unit tests to be translation friendly, do this:
 Change your JUnit test classes to derive from the jsimple.unit.UnitTest class in the jsimple-unit module.
 With that, the assert methods typically stay exactly the same as they are in your current code, but they'll change
 from static calls to calls to wrapper methods in the UnitTest class (with the same names).   The @Test annotations stay the same.
 Any test setup code should move to a setUp method override, instead of using the @SetUp annotation.
-
-
-
-
-
-
-
-
-
-
-
-
-> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-> consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-> Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-> 
-> Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-> id sem consectetuer libero luctus adipiscing.
-
-> This is the first level of quoting.
->
-> > This is nested blockquote.
->
-> Back to the first level.
-
-Here is an example of AppleScript:
-
-    tell application "acme-model"
-        beep
-    end tell
-
-
-
