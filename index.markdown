@@ -4,12 +4,6 @@ title: JUniversal
 permalink: /
 ---
 
-### Current status: Under Construction, Coming Soon ###
-
-JUniversal is almost ready for public preview, but not quite.   I'm still getting website, instructions, and code ready before really
-expecting folks to try it out.   So feel free to poke around if you want, but know that I'm still putting things together & you
-probably want to come back next week.
-
 ### JUniversal makes Java truly cross platform ###
 
 Writing the same code from scratch for every platform is a pain & inefficient.   There must be a better way.
@@ -32,6 +26,12 @@ Check out the [JSimple Javadoc](/jsimpledoc) for details.
 
 
 From a developer experience point of view, you'd probably spend most of your time in your favorite Java IDE, getting shared code written & debugged there, plus doing Android specific dev.   Then switch to Xcode or Visual Studio for a smaller percentage of your time, to write & debug the iOS and Windows device specific stuff.
+
+### Current status ###
+
+JUniversal still has several rough edges, but the C# translation and JSimple library should work well enough to try out.
+We want your feedback, so please check it out.  Expect to run into several little issues along the way, but also expect
+(in most cases) quick fixes for them--once you let us know what they are.
 
 ### Why source translation?  ###
 
@@ -73,5 +73,5 @@ So if you're a web whiz who loves Javascript, and really want to build mobile ap
 
 -->
 
-It's still got lots of rough edges, but the C# translation and JSimple library should work well enough to try out.   Check it out.   Share what you think.
+
 
