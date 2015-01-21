@@ -7,7 +7,7 @@ permalink: /
 ### JUniversal makes Java truly cross platform ###
 
 Writing the same code from scratch for every platform is a pain & inefficient.   There must be a better way.
-JUniversal lets you write code in Java and take that code to places you never thought it could go.
+JUniversal lets you write code in Java (like you probably already do if you develop for Android) and take that code to places you never thought it could go.
 It's primarily targetted to sharing code across mobile apps, but the technology can extend to non-mobile scenarios as well.
 
 ### Here's how it works
@@ -29,9 +29,19 @@ From a developer experience point of view, you'd probably spend most of your tim
 
 ### Current status ###
 
-JUniversal still has several rough edges, but the C# translation and JSimple library should work well enough to try out.
-We want your feedback, so please check it out.  Expect to run into several little issues along the way, but also expect
-(in most cases) quick fixes for them--once you let us know what they are.
+JUniversal still has several rough edges, but it should work well enough to try out.  And we need you to try it out and tell us what the issues are so we can fix them.
+The Java -> C# translator is basically feature complete.   Expect some translation issues, but they almost always cause C# build errors, and the course of action then is to either
+tell us (so we can tweak the translator) or tweak your Java source code to avoid.   Also expect some issues with incomplete doc, etc.
+
+When you have issues/questions, reach out to us through any of the mechanisms on the Contact page (issue tracker, email, even chat).
+For initial JUniversal users, we want to provide very hands on support, both because you'll probably need it and because that's the way for us to get the best feedback.
+
+Is JUniversal stable enough today to ship production apps based on it?   In many cases yes, assuming you get it working for your needs,
+but please reach out before shipping so we can talk through any caveats.
+
+We're also looking for feedback on the JSimple API.   Would you do anything different there in terms of API design, consistent naming,
+Java collection class enhancements, etc.?   In some ways it's an opportunity to improve (at least modestly) on core Java APIs.   If that excites you, input is welcome.
+Obviously, JSimple bug and feature requests are welcome too.
 
 ### Why source translation?  ###
 
@@ -58,20 +68,17 @@ It's easy to see what JUniversal does--just look at the translated code.   In mo
 Simply put, I wanted a cross platform language & toolset that would be comfortable to typical mobile devs who today build for Android in Java and iOS in
 Objective-C or Swift.   That meant supporting something they already use.  And of those three languages, Java is arguably the best choice for cross platform.   Whether you develop on a Mac, Windows, or Linux, there are nice IDE choices.   If you use Java on the server too, all the better.
 
-It may not be the hottest new language in town, though the JSimple version of the Java collection classes and some code actually do allow you use Java 8 lambdas a fair amount if you want (even on Android), giving Java a more modern, functional feel.
+It may not be the hottest new language in town, though the JSimple version of the Java collection classes actually do allow you use Java 8 lambdas a fair amount if you want (even on Android), giving Java a more modern, functional feel.
 
-<!---
-### Comparison to other technologies ###
+<!--
+### Comparison to other x platform technologies ###
 
-There are several technologies out there supporting cross platform mobile
-apps, each with their pros and ons.  JUniversal is targetted to Java developers, like those already developing for Android in Java.
-It uses source code translation.  Among the cross platform technologies out there, JUniversal is arguably among the most
+There are several technologies out there supporting cross platform mobile apps, each with their pros and ons.
+
+If you're a web whiz who loves Javascript, and want to build mobile apps that way, take a look at Apache Cordova.  If you love C# (and it's nice), then check out Xamarin.  If you think it'd be really cool to write for mobile in Clojure, RoboVM can help with that.
+
+But if you'd rather stick with the building for Android, iOS, and Windows with their "normal" platform tools, but want a way to share code (and who wouldn't if it was easy), then check out JUniversal.  Among the cross platform technologies out there, JUniversal is arguably among the most
 native-like, as it produces (through translation) code in the native programming language, built/debugged/packaged with native tools.
 In some ways it's like porting an Android Java app to other platforms but having a computer do the porting rather than a human being.
-
-So if you're a web whiz who loves Javascript, and really want to build mobile apps that way, take a look at Apache Cordova.  If you love C# (and it's nice), then check out Xamarin.  If you think it'd be really cool to write for mobile in Clojure, RoboVM can help with that.   
-
 -->
-
-
 
