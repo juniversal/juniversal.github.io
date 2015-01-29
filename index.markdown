@@ -10,6 +10,9 @@ Writing the same code from scratch for every platform is a pain & inefficient.  
 JUniversal lets you write code in Java (like you probably already do if you develop for Android) and take that code to places you never thought it could go.
 It's primarily targetted to sharing code across mobile apps, but the technology can extend to non-mobile scenarios as well.
 
+There are two core pieces of technology behind the JUniversal approach to cross platform:  source code translators (sometimes called transpilers) and
+ a set of cross platform Java programmer friendly libraries, called JSimple.
+
 ### Here's how it works
 
 1. Pick the code that you want to share cross platform.  It can be a little bit of code (maybe some hairy algorithm) or a lot (everything in your app except the UI).   Develop that in Java, with your favorite Java IDE.  To keep things tidy, you probably want to separate out shared code to a separate modules/JARs.  Ideally, create JUnit tests for it too.
