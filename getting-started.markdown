@@ -105,11 +105,11 @@ To run the translator directly, do
 
 For example, to transate the main acme-model source:
 
-    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar acme-app/acme-model/src/main/java
+    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/libraries/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar acme-app/acme-model/src/main/java
 
 And the test source:
 
-    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar -sourcepath acme-app/acme-model/src/main/java  acme-app/acme-model/src/test/java
+    java -jar juniversal/juniversal-translator/build/libs juniversal-translator-0.8-SNAPSHOT.jar -o acme-app/acme-model/c# -l c# -classpath jsimple/libraries/jsimple-util/build/libs/jsimple-util-0.8-SNAPSHOT.jar -sourcepath acme-app/acme-model/src/main/java  acme-app/acme-model/src/test/java
 
 ### Fixing up your code to be translator friendly ###
 
