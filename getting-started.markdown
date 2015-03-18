@@ -15,7 +15,7 @@ Get the source, both for the JUniversal translator and JSimple libraries:
     git clone https://github.com/juniversal/jsimple.git
 
 Build the translator.   The `gradlew` Gradle wrapper downloads Gradle automatically---no need to install any build tools.
-However, note that the translator uses Java 8.  So you'll have to install Java 8, if you don't already have it, and use for
+However, note that *the translator uses Java 8*.  So you'll have to install the Java 8 JDK, if you don't already have it, and use for
 running Gradle everywhere below.
 
     cd juniversal
