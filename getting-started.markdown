@@ -60,7 +60,7 @@ The easiest way to run the translators is with our Gradle plugins.   Add the fol
 	    }
 
 	    dependencies {
-	        classpath group: 'org.juniversal', name: 'juniversal-gradle-plugins', version: '0.8-SNAPSHOT'
+	        classpath group: 'org.juniversal', name: 'juniversal-gradle-plugins', version: '0.8.3'
 	    }
 	}
 
